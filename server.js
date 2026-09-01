@@ -17,12 +17,17 @@ const bd = require("./database/db");
 // fica de olho na porta
 app.listen(porta);
 
-// acessa a tela index
+// acessa a tela index na pasta Usuario
 app.get('/', (req, res)=>{
-    res.render("index")
+    res.render("Usuario/index")
 })
 
-// acessa a tela login
+// acessa a tela login na pasta Usuario
 app.get('/login', (req, res)=>{
-    res.render("login")
+    res.render("Usuario/login")
 })
+
+// acessa a tela cadastro na pasta Usuario
+app.get('/cadastro', (req, res)=>{
+    res.render("Usuario/cadastro")
+});
