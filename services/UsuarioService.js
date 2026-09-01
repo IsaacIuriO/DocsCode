@@ -1,6 +1,9 @@
+// usa as importações do model e do schema para manipular os dados do usuário
 const UsuarioModel = require('../mvc/models/UsuarioModel');
 const UsuarioSchema = require('../schemas/UsuarioSchema');
 
+// manipula os dados do usuário, usando o model e o schema
+// cria FUNÇÕES para cadastrar, buscar, editar e deletar usuários
 class UsuarioService
 {
     #usuarioSchema
@@ -23,22 +26,24 @@ class UsuarioService
         return id;
     }
 
-    async buscarUsuario(id)
+    async buscarTodosUsuarios()
     {
-        const dado = await this.#usuarioSchema.findOne
-        ({
-            where:{ id: id }
-        });
+        const usuarios = []
+        const dados = await this.#usuarioSchema.findAll();
 
-        if(!dado){
-            return null;
+        for(const usuario of dados)
+        {
+            const u = new Usuario(
+                    usuario.email,
+                    usuario.password,
+                    usuario.username
+                )
+
+            u.id = usuario.id
+            usuarios.push(u)
         }
 
-        const usuario = new UsuarioModel(dado.email, dado.password, dado.username);
-
-        usuario.id = dado.id;
-        
-        return usuario;
+        return usuarios
     }
 
     async deletarUsuario(id)
@@ -54,4 +59,5 @@ class UsuarioService
     }
 }
 
+// exporta para outros arquivos
 module.exports = UsuarioService;

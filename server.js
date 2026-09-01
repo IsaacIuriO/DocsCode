@@ -1,33 +1,34 @@
-const porta = 3000
+const express = require('express')
+const router = require('../app_web2/mvc/routes/config')
 
-const express = require("express");
-const app = express();
+class Server
+{
+    app
+    port
 
-// uso do ejs para gerar páginas html
-app.set("view engine", "ejs");
-app.set("views", __dirname + '/mvc/views');
+    constructor(port)
+    {
+        this.app = express();
+        this.port = port;
 
-// uso do json
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+        this.app.use(express.json());
+        this.app.use(express.urlencoded({extended:true}));
+        this.app.use(router);
+        this.app.set("view engine", "ejs");
+        this.app.set("views", "mvc/views");
+    }
 
-// consulta no banco de dados
-const bd = require("./database/db");
+    listen()
+    {
+        this.app.listen(this.port, () => {
+            console.log("Servidor Online...");
+        });
+    }
+}
 
-// fica de olho na porta
-app.listen(porta);
+// module.exports -> serve para exportar objetos de um arquivo para outros 
+module.exports = new Server(3000);
 
-// acessa a tela index na pasta Usuario
-app.get('/', (req, res)=>{
-    res.render("Usuario/index")
-})
 
-// acessa a tela login na pasta Usuario
-app.get('/login', (req, res)=>{
-    res.render("Usuario/login")
-})
 
-// acessa a tela cadastro na pasta Usuario
-app.get('/cadastro', (req, res)=>{
-    res.render("Usuario/cadastro")
-});
+// app.set("views", __dirname + '/mvc/views');
