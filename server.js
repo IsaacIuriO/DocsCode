@@ -28,7 +28,3 @@ class Server
 
 // module.exports -> serve para exportar objetos de um arquivo para outros 
 module.exports = new Server(3000);
-
-
-
-// app.set("views", __dirname + '/mvc/views');

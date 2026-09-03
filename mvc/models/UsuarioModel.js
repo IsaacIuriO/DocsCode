@@ -2,24 +2,24 @@
 
 // Usuário é uma entidade do sistema.
 // Seus atributos são privados, e só podem ser acessados através de métodos públicos (getters e setters).
-// id (automático), nome, email e senha são atributos do usuário.
+// id (automático), username, email e senha são atributos do usuário.
 class Usuario
 {
     #id
-    #nome
+    #username
     #email
     #senha
 
-    constructor(nome, email, senha)
+    constructor(username, email, senha)
     {
-        this.#nome = nome
+        this.#username = username
         this.#email = email
         this.#senha = senha
         this.#validarEmail(email)
     }
 
     get id(){ return this.#id }
-    get nome(){ return this.#nome }
+    get username(){ return this.#username }
     get email(){ return this.#email }
     get senha(){ return this.#senha }
 

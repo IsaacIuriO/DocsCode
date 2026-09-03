@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const config = require('../database/db');
+const config = require('./database');
 
 console.log(config);
 

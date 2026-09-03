@@ -13,6 +13,12 @@ class Usuario extends Model{}
 // Começa a configuração da tabela
 Usuario.init(
 {
+    username:
+    {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    
     email:
     {
         type: DataTypes.STRING,
@@ -22,12 +28,6 @@ Usuario.init(
     },
     
     password:
-    {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
-    username:
     {
         type: DataTypes.STRING,
         allowNull: false

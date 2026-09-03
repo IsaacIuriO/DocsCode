@@ -1,5 +1,5 @@
 // usa as importações do model e do schema para manipular os dados do usuário
-const UsuarioModel = require('../mvc/models/UsuarioModel');
+const Usuario = require('../mvc/models/UsuarioModel');
 const UsuarioSchema = require('../schemas/UsuarioSchema');
 
 // manipula os dados do usuário, usando o model e o schema
@@ -15,13 +15,15 @@ class UsuarioService
 
     async cadastrarUsuario(username, email, senha)
     {
-        const usuario = new UsuarioModel(username, email, senha);
+        const usuario = new Usuario(username, email, senha);
 
-        const id = await this.#usuarioSchema.create({
-            username: usuario.nome,
-            email: usuario.email,
-            password: usuario.senha
-        });
+        const id = await this.#usuarioSchema.create(
+            {
+                username: usuario.username,
+                email: usuario.email,
+                password: usuario.senha,
+            }
+        )
 
         return id;
     }
@@ -34,10 +36,10 @@ class UsuarioService
         for(const usuario of dados)
         {
             const u = new Usuario(
-                    usuario.email,
-                    usuario.password,
-                    usuario.username
-                )
+                usuario.username,
+                usuario.email,
+                usuario.senha
+            )
 
             u.id = usuario.id
             usuarios.push(u)
