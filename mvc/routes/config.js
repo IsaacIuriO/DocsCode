@@ -8,7 +8,7 @@ const UsuarioController = require("../controllers/UsuarioController");
 const router = Router();
 
 // USUARIO
-router.get("/usuario", (req, res) => UsuarioController.index(req, res));
+router.get("/", (req, res) => UsuarioController.index(req, res));
 router.get("/usuario/criar", (req, res) => UsuarioController.usuarioCadastrar(req, res));
 router.post("/usuario/criar", (req, res) => UsuarioController.usuarioPostarAsync(req, res));
 router.get("/usuario/listar", (req, res) => UsuarioController.usuarioLista(req, res));

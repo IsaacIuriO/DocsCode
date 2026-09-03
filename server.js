@@ -16,6 +16,7 @@ class Server
         this.app.use(router);
         this.app.set("view engine", "ejs");
         this.app.set("views", "mvc/views");
+        this.app.use(express.static("public"));
     }
 
     listen()

@@ -3,7 +3,7 @@ const server = require("./server");
 
 async function run()
 {
-    const port = 3000;
+    const port = 1000;
 
     try
     {
