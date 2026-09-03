@@ -1,5 +1,5 @@
 const express = require('express')
-const router = require('../app_web2/mvc/routes/config')
+const router = require('./mvc/routes/config')
 
 class Server
 {
