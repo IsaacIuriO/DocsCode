@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Cadastro de Usuário</title>
+
+        <!-- Bootstrap 5 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <style>
+            main {
+                width: 100%;
+                margin: 0 auto;
+            }
+        </style>
+
+    </head>
+
+    <body class="bg-light d-flex align-items-center py-5 min-vh-100">
+
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-5">
+                        <div class="card shadow border-0 rounded-4 p-4">
+                            <div class="card-body">
+                                <h2 class="text-center mb-4 fw-bold text-primary">Criar Conta</h2>
+                                
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Nome Completo</label>
+                                        <input type="text" class="form-control" id="username" placeholder="Digite seu nome" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">E-mail</label>
+                                        <input type="email" class="form-control" id="email" placeholder="seu@email.com" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="senha" class="form-label">Senha</label>
+                                        <input type="password" class="form-control" id="senha" placeholder="Mínimo de 6 caracteres" required>
+                                    </div>
+
+                                    <div class="d-grid mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg rounded-pill" id="btnCadastrarUsuario">Cadastrar</button>
+                                    </div>
+                                </form>
+
+                                <div class="text-center mt-3">
+                                    <small class="text-muted">Já tem uma conta? <a href="#" class="text-decoration-none">Faça login</a></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    <script>
+
+            const btnCadastrarUsuario = document.getElementById("btnCadastrarUsuario")
+
+            btnCadastrarUsuario.addEventListener("click", cadastrarUsuario)
+
+            async function cadastrarUsuario(e)
+            {
+                e.preventDefault()
+
+                const username = document.getElementById("username")
+                const email = document.getElementById("email")
+                const senha = document.getElementById("senha")
+                const mensagem = document.getElementById("mensagem")
+
+                const url = "/user/cadastro"
+
+                const response = await fetch(url,
+                {
+                    method:'POST',
+                    headers:{ 'Content-Type':'application/json' },
+                    body: JSON.stringify(
+                    {
+                        username: username.value,
+                        email: email.value,
+                        senha: senha.value
+                    })
+                })
+
+                const data = await response.text()
+
+                if(response.ok)
+                {
+                    mensagem.innerHTML = `
+                        <div class="alert alert-success">
+                            Sucesso ao cadastrar usuário!
+                        </div>
+                    `
+
+                    username.value = ""
+                    email.value = ""
+                    senha.value = ""
+
+                }
+                else
+                {
+                    mensagem.innerHTML = `
+                        <div class="alert alert-danger">
+                            Erro ao cadastrar usuário!
+                        </div>
+                    `
+                }
+
+                console.log(data)
+            }
+
+        </script>
+
+    </body>
+</html>
