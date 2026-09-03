@@ -9,70 +9,309 @@
         <title>Cadastro de Usuário</title>
 
         <!-- Bootstrap 5 CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
         <style>
+
+            * { box-sizing: border-box; }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+
+                background-color: #120a2b;
+
+                font-family: 'Poppins', sans-serif;
+
+                color: white;
+            }
+
             main {
                 width: 100%;
+                min-height: 100vh;
+
+                display: flex;
+                align-items: center;
+            }
+
+            .container { max-width: 1200px; }
+
+            /* Área da imagem */
+            .imagem-container {
+                width: 100%;
+                height: 355px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                color: white;
+
+                font-size: 38px;
+                font-weight: 400;
+            }
+
+            .imagem-container img {
+                width: 500px;
+                height: auto;
+            }
+
+            /* Área do cadastro */
+            .cadastro-container {
+                width: 100%;
+                max-width: 420px;
+
                 margin: 0 auto;
             }
 
-            #mensagem {
-                margin: 0 auto 1rem auto;
-            }
-        </style>
+            .titulo {
+                font-size: 40px;
+                font-weight: 400;
 
+                text-align: center;
+
+                margin-bottom: 25px;
+            }
+
+            /* Labels */
+            .form-label {
+                color: white;
+
+                font-size: 23px;
+                font-weight: 400;
+
+                margin-bottom: 7px;
+            }
+
+            /* Inputs */
+            .form-control {
+                height: 42px;
+
+                border: none;
+                border-radius: 25px;
+
+                background-color: #d9d9d9;
+
+                padding: 8px 18px;
+
+                font-family: 'Poppins', sans-serif;
+                font-size: 16px;
+
+                box-shadow: none;
+            }
+
+            .form-control:focus {
+                background-color: #eeeeee;
+                box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+            }
+
+            .form-control::placeholder { color: #777; }
+
+            /* Espaçamento dos campos */
+            .campo { margin-bottom: 25px; }
+
+            /* Botão principal */
+            #btnCadastrarUsuario {
+                background-color: #000000;
+
+                border: none;
+
+                border-radius: 25px;
+
+                padding: 15px 58px;
+
+                font-family: 'Poppins', sans-serif;
+                font-size: 20px;
+
+                transition: 0.2s;
+            }
+
+            #btnCadastrarUsuario:hover {
+                background-color: #51AFE3;
+                transform: scale(1.03);
+            }
+
+            /* Links */
+            .links {
+                display: flex;
+
+                flex-direction: column;
+
+                align-items: center;
+
+                gap: 10px;
+
+                margin-top: 18px;
+            }
+
+            .link-botao {
+                display: inline-block;
+
+                background-color: #000000;
+
+                color: white;
+
+                text-decoration: none;
+
+                border-radius: 25px;
+
+                padding: 5px 25px;
+
+                font-size: 18px;
+
+                transition: 0.2s;
+            }
+
+            .link-botao:hover {
+                background-color: #51AFE3;
+
+                color: white;
+
+                transform: scale(1.02);
+            }
+
+            /* Mensagens */
+            #mensagem { margin-bottom: 15px; }
+
+            #mensagem .alert {
+                border-radius: 15px;
+                font-size: 14px;
+            }
+
+            /* Responsividade */
+            @media (max-width: 767px) {
+
+                main { padding: 40px 20px; }
+
+                .imagem-container {
+                    height: 250px;
+
+                    font-size: 32px;
+
+                    margin-bottom: 40px;
+                }
+
+                .cadastro-container { max-width: 500px; }
+
+                .titulo { font-size: 34px; }
+
+                .form-label { font-size: 19px; }
+            }
+
+            @media (max-width: 480px) {
+
+                main { padding: 30px 15px; }
+
+                .imagem-container {
+                    height: 200px;
+                    font-size: 27px;
+                }
+
+                .titulo { font-size: 30px; }
+
+                .form-label { font-size: 18px; }
+
+                .link-botao { font-size: 16px; }
+
+            }
+
+        </style>
     </head>
 
-    <body class="bg-light d-flex align-items-center py-5 min-vh-100">
+
+    <body>
 
         <main>
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-6 col-lg-5">
-                        <div class="card shadow border-0 rounded-4 p-4">
-                            <div class="card-body">
-                                
-                                <h2 class="text-center mb-4 fw-bold text-primary">Criar Conta</h2>
+                <div class="row align-items-center g-5">
 
-                                <div id="mensagem"></div>
+                    <!-- IMAGEM -->
+                    <div class="col-md-6">
+                        <div class="imagem-container">
+                            <img src="/imgs/docscode_logo.png" alt="Logo DocsCode">
+                        </div>
+                    </div>
 
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">Nome Completo</label>
-                                        <input type="text" class="form-control" id="username" placeholder="Digite seu nome" required>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">E-mail</label>
-                                        <input type="email" class="form-control" id="email" placeholder="seu@email.com" required>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="senha" class="form-label">Senha</label>
-                                        <input type="password" class="form-control" id="senha" placeholder="Mínimo de 6 caracteres" required>
-                                    </div>
 
-                                    <div class="d-grid mt-4">
-                                        <button type="submit" class="btn btn-primary btn-lg rounded-pill" id="btnCadastrarUsuario">
-                                            Cadastrar
-                                        </button>
-                                    </div>
+                    <!-- CADASTRO -->
+                    <div class="col-md-6">
+                        <div class="cadastro-container">
+                            <h1 class="titulo">
+                                Cadastrar-se
+                            </h1>
 
-                                </form>
+                            <div id="mensagem"></div>
 
-                                <div class="text-center mt-3">
-                                    <small class="text-muted">Já tem uma conta? <a href="#" class="text-decoration-none">Faça login</a></small>
+                            <form>
+                                <!-- Nome -->
+                                <div class="campo">
+                                    <label for="username" class="form-label">
+                                        Nome de Usuário
+                                    </label>
+
+                                    <input type="text" class="form-control" id="username" placeholder="Digite seu nome de usuário" required>
                                 </div>
-                                
-                            </div>
+
+                                <!-- Email -->
+                                <div class="campo">
+                                    <label for="email" class="form-label">
+                                        E-mail
+                                    </label>
+
+                                    <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+                                </div>
+
+                                <!-- Senha -->
+                                <div class="campo">
+                                    <label for="senha" class="form-label">
+                                        Senha
+                                    </label>
+
+                                    <input type="password" class="form-control" id="senha" placeholder="Digite sua senha" required>
+                                </div>
+
+
+                                <!-- Botão -->
+                                <div class="text-center mt-4">
+
+                                    <button type="submit" class="btn btn-dark" id="btnCadastrarUsuario">
+                                        Cadastrar
+                                    </button>
+
+                                </div>
+
+
+                                <!-- Links -->
+                                <div class="links">
+                                    <a href="#" class="link-botao">
+                                        Já tenho uma conta!
+                                    </a>
+
+                                    <a href="#" class="link-botao">
+                                        Esqueci a senha?
+                                    </a>
+                                </div>
+
+                            </form>
+
                         </div>
                     </div>
                 </div>
             </div>
+
         </main>
 
-    <script>
+
+        <script>
 
             const btnCadastrarUsuario = document.getElementById("btnCadastrarUsuario")
 
