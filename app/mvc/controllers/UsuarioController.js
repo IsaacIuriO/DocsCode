@@ -19,11 +19,17 @@ class UsuarioController
         res.render('Usuario/cadastro');
     }
 
+    // Acessa a tela de login do usuário
+    usuarioLogin(req, res)
+    {
+        res.render('Usuario/login');
+    }
+
     // Acessa a tela de listagem de usuários
     async usuarioLista(req, res)
     {
         const usuarios = await this.usuarioService.buscarTodosUsuarios()
-        res.render("Usuario/ListView", { usuarios: usuarios }) 
+        res.render("Usuario/lista", { usuarios: usuarios }) 
     }
 
     // Cadastra usuário no banco de dados

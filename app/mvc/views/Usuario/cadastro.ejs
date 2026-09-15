@@ -293,7 +293,7 @@
 
                                 <!-- Links -->
                                 <div class="links">
-                                    <a href="#" class="link-botao">
+                                    <a id="linkTelaLogin" class="link-botao">
                                         Já tenho uma conta!
                                     </a>
 
@@ -367,6 +367,12 @@
                 console.log(data)
             }
 
+            const linkTelaLogin = document.getElementById("linkTelaLogin")
+            
+            linkTelaLogin.addEventListener("click", telaLogin)
+
+            function telaLogin() { window.location.href = "/usuario/login" }
+            
         </script>
 
     </body>

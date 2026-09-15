@@ -120,7 +120,7 @@
             .campo { margin-bottom: 25px; }
 
             /* Botão principal */
-            #btnCadastrarUsuario {
+            #btnEntrarUsuario {
                 background-color: #000000;
 
                 border: none;
@@ -135,7 +135,7 @@
                 transition: 0.2s;
             }
 
-            #btnCadastrarUsuario:hover {
+            #btnEntrarUsuario:hover {
                 background-color: #51AFE3;
                 transform: scale(1.03);
             }
@@ -179,14 +179,6 @@
                 transform: scale(1.02);
             }
 
-            /* Mensagens */
-            #mensagem { margin-bottom: 15px; }
-
-            #mensagem .alert {
-                border-radius: 15px;
-                font-size: 14px;
-            }
-
             /* Responsividade */
             @media (max-width: 767px) {
 
@@ -225,6 +217,7 @@
             }
 
         </style>
+
     </head>
 
 
@@ -246,7 +239,7 @@
                     <div class="col-md-6">
                         <div class="cadastro-container">
                             <h1 class="titulo">
-                                Cadastrar-se
+                                Entrar
                             </h1>
 
                             <form>
@@ -281,22 +274,18 @@
                                 <!-- Botão -->
                                 <div class="text-center mt-4">
 
-                                    <button type="submit" class="btn btn-dark" id="btnCadastrarUsuario">
-                                        Cadastrar
+                                    <button type="submit" class="btn btn-dark" id="btnEntrarUsuario">
+                                        Entrar
                                     </button>
 
                                 </div>
 
-
-                                <!-- Links -->
                                 <div class="links">
-                                    <a href="#" class="link-botao">
-                                        Já tenho uma conta!
-                                    </a>
 
                                     <a href="#" class="link-botao">
                                         Esqueci a senha?
                                     </a>
+
                                 </div>
 
                             </form>

@@ -11,6 +11,8 @@ const router = Router();
 router.get("/", (req, res) => UsuarioController.index(req, res));
 router.get("/usuario/criar", (req, res) => UsuarioController.usuarioCadastrar(req, res));
 router.post("/usuario/criar", (req, res) => UsuarioController.usuarioPostarAsync(req, res));
+router.get("/usuario/login", (req, res) => UsuarioController.usuarioLogin(req, res));
+router.post("/usuario/login", (req, res) => UsuarioController.usuarioLogarAsync(req, res));
 router.get("/usuario/listar", (req, res) => UsuarioController.usuarioLista(req, res));
 router.delete("/usuario/deletar/:id", (req, res) => UsuarioController.usuarioDeletarAsync(req, res));
 
