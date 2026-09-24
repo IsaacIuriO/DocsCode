@@ -243,15 +243,6 @@
                             </h1>
 
                             <form>
-                                <!-- Nome -->
-                                <div class="campo">
-                                    <label for="username" class="form-label">
-                                        Nome de Usuário
-                                    </label>
-
-                                    <input type="text" class="form-control" id="username" placeholder="Digite seu nome de usuário" required>
-                                </div>
-
                                 <!-- Email -->
                                 <div class="campo">
                                     <label for="email" class="form-label">
@@ -299,7 +290,10 @@
 
 
         <script>
-
+            async function logarUsuario(e)
+            {
+                e.preventDefault()
+            }
         </script>
 
     </body>

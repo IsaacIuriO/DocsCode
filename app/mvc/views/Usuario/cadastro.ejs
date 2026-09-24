@@ -314,8 +314,8 @@
 
         <script>
 
+            // Botão: "Cadastrar"
             const btnCadastrarUsuario = document.getElementById("btnCadastrarUsuario")
-
             btnCadastrarUsuario.addEventListener("click", cadastrarUsuario)
 
             async function cadastrarUsuario(e)
@@ -367,10 +367,10 @@
                 console.log(data)
             }
 
-            const linkTelaLogin = document.getElementById("linkTelaLogin")
-            
+            // Botão: "Já tenho uma conta!" 
+            const linkTelaLogin = document.getElementById("linkTelaLogin")            
             linkTelaLogin.addEventListener("click", telaLogin)
-
+            
             function telaLogin() { window.location.href = "/usuario/login" }
             
         </script>

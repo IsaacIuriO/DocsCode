@@ -2,6 +2,9 @@
 const Usuario = require('../mvc/models/UsuarioModel');
 const UsuarioSchema = require('../schemas/UsuarioSchema');
 
+// instala biblioteca de criptografia
+const bcrypt = require("bcrypt");
+
 // manipula os dados do usuário, usando o model e o schema
 // cria FUNÇÕES para cadastrar, buscar, editar e deletar usuários
 class UsuarioService
@@ -17,13 +20,15 @@ class UsuarioService
     {
         const usuario = new Usuario(username, email, senha);
 
+        const senhaHash = await bcrypt.hash(usuario.senha, 10);
+
         const id = await this.#usuarioSchema.create(
             {
                 username: usuario.username,
                 email: usuario.email,
-                password: usuario.senha,
+                password: senhaHash
             }
-        )
+        );
 
         return id;
     }
@@ -39,10 +44,10 @@ class UsuarioService
                 usuario.username,
                 usuario.email,
                 usuario.senha
-            )
+            );
 
-            u.id = usuario.id
-            usuarios.push(u)
+            u.id = usuario.id;
+            usuarios.push(u);
         }
 
         return usuarios
