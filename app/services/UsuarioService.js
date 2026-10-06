@@ -33,6 +33,23 @@ class UsuarioService
         return id;
     }
 
+    async logarUsuario(email, senha){
+
+        const usuario = await this.#usuarioSchema.findOne
+        ({
+            where:{ email: email }
+        });
+
+        const senhaValida = await bcrypt.compare(senha, usuario.password);
+        if(!usuario || !senhaValida)
+        {
+            return false;
+        }
+
+        req.session.usuarioLogado = true; // Marcar o usuário como logado na sessão
+        return true;
+    }
+
     async buscarTodosUsuarios()
     {
         const usuarios = []

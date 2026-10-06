@@ -10,6 +10,7 @@ class UsuarioController
     // Acessa a tela inicial do usuário
     index(req, res)
     {
+        req.session.usuarioLogado = false;
         res.render('Usuario/index');
     }
 
@@ -23,6 +24,15 @@ class UsuarioController
     usuarioLogin(req, res)
     {
         res.render('Usuario/login');
+    }
+
+    usuarioConversa(req, res)
+    {
+        if (!req.session.usuarioLogado) {
+            return res.redirect('/usuario/login');
+        }
+
+        res.render('Usuario/conversa');
     }
 
     // Acessa a tela de listagem de usuários

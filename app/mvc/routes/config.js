@@ -8,12 +8,25 @@ const UsuarioController = require("../controllers/UsuarioController");
 const router = Router();
 
 // USUARIO
+
+// Página inicial
 router.get("/", (req, res) => UsuarioController.index(req, res));
+
+// Página de cadastro do usuário
 router.get("/usuario/criar", (req, res) => UsuarioController.usuarioCadastrar(req, res));
 router.post("/usuario/criar", (req, res) => UsuarioController.usuarioPostarAsync(req, res));
+
+// Página de login do usuário
 router.get("/usuario/login", (req, res) => UsuarioController.usuarioLogin(req, res));
 router.post("/usuario/login", (req, res) => UsuarioController.usuarioLogarAsync(req, res));
+
+// Página de conversa do usuário
+router.get("/usuario/conversa", (req, res) => UsuarioController.usuarioConversa(req, res));
+
+// Página de listagem de usuários
 router.get("/usuario/listar", (req, res) => UsuarioController.usuarioLista(req, res));
+
+// Deleta usuário do banco de dados (função)
 router.delete("/usuario/deletar/:id", (req, res) => UsuarioController.usuarioDeletarAsync(req, res));
 
 module.exports = router;

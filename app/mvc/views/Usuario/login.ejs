@@ -293,8 +293,29 @@
             async function logarUsuario(e)
             {
                 e.preventDefault()
+
+                const email = document.getElementById('email').value
+                const senha = document.getElementById('senha').value
+
+                const url = '/usuario/login'
+
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, senha })
+                })
+
+                if (response.ok) {
+                    // Redirecionar para a página de conversa
+                    window.location.href = '/usuario/conversa';
+                } else {
+                    // Exibir mensagem de erro
+                    const errorData = await response.json();
+                    alert(errorData.message || 'Erro ao fazer login. Tente novamente.');
+                }
             }
-        </script>
+
+            </script>
 
     </body>
 </html>
