@@ -12,8 +12,12 @@ class UsuarioController
     // Acessa a tela inicial do usuário
     index(req, res)
     {
-        req.session.usuarioLogado = false;
-        res.render('Usuario/index');
+        if (req.session.usuarioLogado)
+        {
+            return res.redirect('/usuario/conversa');
+        }
+
+        return res.render('Usuario/index');
     }
 
     // Acessa a tela de cadastro do usuário
@@ -26,6 +30,22 @@ class UsuarioController
     usuarioLogin(req, res)
     {
         res.render('Usuario/login');
+    }
+
+    usuarioLogout(req, res)
+    {
+        req.session.destroy((erro) =>
+        {
+            if (erro)
+            {
+                console.error(erro);
+                return res.status(500).send('Erro ao sair da conta.');
+            }
+
+            res.clearCookie('docscode.sid');
+
+            return res.redirect('/usuario/login');
+        });
     }
 
     usuarioConversa(req, res)
@@ -62,35 +82,66 @@ class UsuarioController
     {
         try
         {
-            const resultados = await this.usuarioService.logarUsuario(
+            const usuario = await this.usuarioService.logarUsuario(
                 req.body.email,
                 req.body.senha
             );
 
-            if (!resultados)
+            if (!usuario)
             {
                 return res.status(401).json({
                     mensagem: "E-mail ou senha incorretos."
                 });
             }
 
-            req.session.usuarioLogado = true;
-            req.session.usuarioId = resultados.id;
+            // Evita reutilizar o identificador anterior
+            req.session.regenerate((erro) =>
+            {
+                if (erro)
+                {
+                    console.error(erro);
 
-            return res.json({
-                mensagem: "Login realizado com sucesso!",
-                usuario: resultados
+                    return res.status(500).json({
+                        mensagem: "Não foi possível iniciar a sessão."
+                    });
+                }
+
+                // Dados do usuário autenticado
+                req.session.usuarioLogado = true;
+                req.session.usuarioId = usuario.id;
+                req.session.username = usuario.username;
+
+                req.session.save((erro) =>
+                {
+                    if (erro)
+                    {
+                        console.error(erro);
+
+                        return res.status(500).json({
+                            mensagem: "Não foi possível salvar a sessão."
+                        });
+                    }
+
+                    return res.json({
+                        mensagem: "Login realizado com sucesso!",
+                        usuario: {
+                            id: usuario.id,
+                            username: usuario.username
+                        }
+                    });
+                });
             });
         }
         catch (erro)
         {
-            console.error("Erro ao realizar login:", erro);
+            console.error("Erro no login:", erro);
 
             return res.status(500).json({
                 mensagem: "Erro interno ao realizar login."
             });
         }
     }
+
 
     // Deleta usuário do banco de dados
     async usuarioDeletarAsync(req, res)
