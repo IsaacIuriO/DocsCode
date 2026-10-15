@@ -1,3 +1,5 @@
+<!-- login.ejs -->
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -66,7 +68,7 @@
             }
 
             /* Área do cadastro */
-            .cadastro-container {
+            .login-container {
                 width: 100%;
                 max-width: 420px;
 
@@ -80,6 +82,16 @@
                 text-align: center;
 
                 margin-bottom: 25px;
+            }
+
+            /* Mensagem */
+            #mensagem {
+                margin-bottom: 15px;
+            }
+
+            #mensagem .alert {
+                border-radius: 15px;
+                font-size: 14px;
             }
 
             /* Labels */
@@ -235,12 +247,15 @@
                     </div>
 
 
-                    <!-- CADASTRO -->
+                    <!-- LOGIN -->
                     <div class="col-md-6">
-                        <div class="cadastro-container">
+                        <div class="login-container">
                             <h1 class="titulo">
                                 Entrar
                             </h1>
+
+                            <!-- MENSSAGEM DE SUCESSO OU ERRO -->
+                            <div id="mensagem"></div>
 
                             <form>
                                 <!-- Email -->
@@ -271,12 +286,11 @@
 
                                 </div>
 
+                                <!-- Links -->
                                 <div class="links">
-
                                     <a href="#" class="link-botao">
                                         Esqueci a senha?
                                     </a>
-
                                 </div>
 
                             </form>
@@ -290,32 +304,49 @@
 
 
         <script>
+
+            // Botão: "Entrar"
+            const btnEntrarUsuario = document.getElementById("btnEntrarUsuario")
+            btnEntrarUsuario.addEventListener("click", logarUsuario)
+
             async function logarUsuario(e)
             {
-                e.preventDefault()
+                e.preventDefault();
 
-                const email = document.getElementById('email').value
-                const senha = document.getElementById('senha').value
+                const email = document.getElementById('email');
+                const senha = document.getElementById('senha');
 
-                const url = '/usuario/login'
-
+                const url = "/usuario/login";
+                
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, senha })
-                })
+                    body: JSON.stringify({
+                        email: email.value,
+                        senha: senha.value
+                    })
+                });
 
-                if (response.ok) {
-                    // Redirecionar para a página de conversa
-                    window.location.href = '/usuario/conversa';
-                } else {
-                    // Exibir mensagem de erro
-                    const errorData = await response.json();
-                    alert(errorData.message || 'Erro ao fazer login. Tente novamente.');
+                const data = await response.json();
+                const mensagem = document.getElementById("mensagem");
+
+                if (response.ok)
+                {
+                    window.location.href = "/usuario/conversa";
                 }
+                else
+                {
+                    mensagem.innerHTML = `
+                        <div class="alert alert-danger">
+                            ${data.mensagem || "Não foi possível realizar o login."}
+                        </div>
+                    `;
+                }
+
+                console.log(data);
             }
 
-            </script>
+        </script>
 
     </body>
 </html>

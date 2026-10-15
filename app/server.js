@@ -2,10 +2,16 @@ const express = require('express')
 const session = require('express-session');
 
 const sessionConfig = {
+    name: 'docscode.sid',
     secret: 'segredo',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 } // 1 hora em milissegundos
+    cookie: {
+        httpOnly: true,
+        secure: false, // Defina como true se estiver usando HTTPS
+        sameSite: 'lax',
+        maxAge: 1000 * 60 * 60  // 1 hora em milissegundos
+    }
 };
 
 const router = require('./mvc/routes/config');

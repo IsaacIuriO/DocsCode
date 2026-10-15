@@ -1,3 +1,5 @@
+// UsuarioController.js
+
 const UsuarioService = require('../../services/UsuarioService');
 
 class UsuarioController
@@ -52,6 +54,42 @@ class UsuarioController
         )
 
         res.json({ id: id })
+    }
+
+    // Acessa a tela de login do usuário
+    
+    async usuarioLogarAsync(req, res)
+    {
+        try
+        {
+            const resultados = await this.usuarioService.logarUsuario(
+                req.body.email,
+                req.body.senha
+            );
+
+            if (!resultados)
+            {
+                return res.status(401).json({
+                    mensagem: "E-mail ou senha incorretos."
+                });
+            }
+
+            req.session.usuarioLogado = true;
+            req.session.usuarioId = resultados.id;
+
+            return res.json({
+                mensagem: "Login realizado com sucesso!",
+                usuario: resultados
+            });
+        }
+        catch (erro)
+        {
+            console.error("Erro ao realizar login:", erro);
+
+            return res.status(500).json({
+                mensagem: "Erro interno ao realizar login."
+            });
+        }
     }
 
     // Deleta usuário do banco de dados
