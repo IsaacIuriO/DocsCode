@@ -38,8 +38,7 @@ class Server
         this.app.use(session(sessionConfig));
 
         this.app.set('view engine', 'ejs');
-        this.app.set('views', path.join(__dirname, 'mvc/views')
-        );
+        this.app.set('views', path.join(__dirname, 'mvc/views'));
 
         this.app.use(router);
     }
@@ -52,4 +51,4 @@ class Server
     }
 }
 
-module.exports = new Server(3000);
+module.exports = new Server();
