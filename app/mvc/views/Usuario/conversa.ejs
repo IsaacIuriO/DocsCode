@@ -1,11 +1,670 @@
+<!-- conversa.ejs -->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olá</title>
+
+    <title>DocsCode AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #100e12;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Barra lateral */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 248px;
+            height: 100vh;
+            background-color: #201f20;
+            display: flex;
+            flex-direction: column;
+            padding: 15px 8px 10px;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px 22px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .imagem-container {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .imagem-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 15px;
+            color: #bdbdbd;
+        }
+
+        .header-icons i {
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Navegação */
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            width: 100%;
+            padding: 9px 12px;
+            border-radius: 25px;
+            color: #dedede;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            transition: 0.2s;
+        }
+
+        .menu-item i {
+            font-size: 16px;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background-color: #151515;
+            color: white;
+        }
+
+        .menu-item.active {
+            font-weight: 500;
+        }
+
+        /* Notebooks */
+
+        .section-label {
+            color: #999;
+            font-size: 11px;
+            padding: 22px 7px 8px;
+        }
+
+        .notebook-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 10px;
+            color: #dedede;
+            font-size: 12px;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+
+        .notebook-item:hover {
+            background-color: #303030;
+            color: white;
+        }
+
+        .notebook-item i {
+            font-size: 16px;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 8px;
+        }
+
+        .history-header .section-label {
+            padding-top: 22px;
+        }
+
+        .history-item {
+            display: block;
+            padding: 9px 7px;
+            color: #dedede;
+            text-decoration: none;
+            font-size: 11px;
+            border-radius: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .history-item:hover {
+            background-color: #303030;
+        }
+
+        /* Perfil inferior */
+
+        .sidebar-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 10px 7px 3px;
+        }
+
+        .avatar {
+            width: 29px;
+            height: 29px;
+            min-width: 29px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #51afe3, #7460dc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .profile-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .profile-name {
+            font-size: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .profile-plan {
+            color: #aaa;
+            font-size: 10px;
+        }
+
+        .settings-button {
+            background: transparent;
+            border: none;
+            color: #ccc;
+            font-size: 16px;
+        }
+
+        /* Área principal */
+
+        main {
+            margin-left: 248px;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #100e12;
+        }
+
+        /* Brilho azulado de fundo */
+
+        main::before {
+            content: "";
+            position: absolute;
+            width: 650px;
+            height: 500px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -43%);
+            background: radial-gradient(
+                ellipse,
+                rgba(48, 62, 190, 0.36) 0%,
+                rgba(26, 37, 115, 0.22) 40%,
+                rgba(16, 14, 18, 0) 72%
+            );
+            pointer-events: none;
+        }
+
+        /* Cabeçalho superior */
+
+        .topbar {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 14px 25px;
+        }
+
+        /* Conteúdo central */
+
+        .chat-area {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        .titulo {
+            font-size: 30px;
+            font-weight: 400;
+            color: #e5e2ec;
+            text-align: center;
+            margin-bottom: 34px;
+            letter-spacing: -1px;
+        }
+
+        /* Caixa de mensagem */
+
+        .prompt-container {
+            width: 100%;
+            max-width: 570px;
+        }
+
+        .prompt-box {
+            min-height: 56px;
+            width: 100%;
+            background-color: #222124;
+            border: 1px solid transparent;
+            border-radius: 35px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .prompt-box:focus-within {
+            border-color: #49465b;
+            background-color: #252329;
+        }
+
+        .prompt-icon {
+            background: transparent;
+            border: none;
+            color: #e0e0e0;
+            font-size: 21px;
+            padding: 0 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .prompt-icon:hover {
+            color: #51afe3;
+        }
+
+        .prompt-input {
+            flex: 1;
+            min-width: 0;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+        }
+
+        .prompt-input::placeholder {
+            color: #c4c2c8;
+        }
+
+        .send-button {
+            display: none;
+            width: 33px;
+            height: 33px;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 50%;
+            background-color: #51afe3;
+            color: #100e12;
+            transition: 0.2s;
+        }
+
+        .send-button:hover {
+            background-color: #8acdf2;
+        }
+
+        .prompt-hint {
+            color: #89868f;
+            font-size: 10px;
+            text-align: center;
+            margin-top: 14px;
+        }
+
+        /* Mensagens de exemplo */
+
+        .suggestions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .suggestion {
+            padding: 9px 14px;
+            border: 1px solid #343139;
+            background-color: rgba(34, 33, 36, 0.7);
+            color: #c9c6d0;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .suggestion:hover {
+            border-color: #51afe3;
+            color: white;
+            background-color: #252329;
+        }
+
+        /* Responsividade */
+
+        @media (max-width: 768px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+                width: 260px;
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.3);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            main {
+                margin-left: 0;
+            }
+
+            .topbar {
+                padding: 12px 16px;
+            }
+
+            .chat-area {
+                padding: 20px;
+                padding-bottom: 60px;
+            }
+
+            .titulo {
+                font-size: 27px;
+                margin-bottom: 28px;
+            }
+
+            .prompt-container {
+                max-width: 570px;
+            }
+
+            main::before {
+                width: 100%;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .titulo {
+                font-size: 24px;
+            }
+
+            .prompt-box {
+                padding: 9px 11px;
+                gap: 7px;
+            }
+
+            .prompt-input {
+                font-size: 12px;
+            }
+
+            .prompt-icon {
+                font-size: 18px;
+            }
+
+            .suggestions {
+                gap: 7px;
+            }
+
+            .suggestion {
+                font-size: 10px;
+                padding: 8px 11px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    Olá, mundo!
+
+    <!-- Barra lateral -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="logo">
+                <div class="imagem-container">
+                    <img src="/imgs/docscode_logo.png" alt="Logo DocsCode">
+                </div>
+                <span>DocsCode AI</span>
+            </div>
+
+            <div class="header-icons">
+                <i class="bi bi-search" title="Pesquisar"></i>
+            </div>
+
+        </div>
+
+
+        <!-- Menu principal -->
+        <nav class="menu">
+
+            <a href="#" class="menu-item active">
+                <i class="bi bi-pencil-square"></i>
+                <span>Nova conversa</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i class="bi bi-grid"></i>
+                <span>Uploads</span>
+            </a>
+
+        </nav>
+
+
+        <!-- Histórico -->
+        <div class="history-header">
+            <span class="section-label">Todas</span>
+        </div>
+
+        <a href="#" class="history-item">
+            Projeto de Desenvolvimento
+        </a>
+
+
+        <!-- Perfil -->
+        <div class="sidebar-footer">
+
+            <div class="avatar">
+                <i class="bi bi-person-fill"></i>
+            </div>
+
+            <div class="profile-info">
+                <div class="profile-name">Meu Perfil</div>
+                <div class="profile-plan">Plano gratuito</div>
+            </div>
+
+            <button class="settings-button" title="Configurações">
+                <i class="bi bi-gear"></i>
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- Área principal -->
+    <main>
+
+        <header class="topbar">
+            <!-- Topbar -->
+        </header>
+
+        <!-- Conteúdo central -->
+        <section class="chat-area">
+
+            <h1 class="titulo">Compartilhe comigo tuas ideias.</h1>
+
+            <div class="prompt-container">
+
+                <form class="prompt-box" id="chatForm">
+
+                    <button type="button" class="prompt-icon"
+                            title="Adicionar arquivo">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+
+                    <input
+                        type="text"
+                        class="prompt-input"
+                        id="promptInput"
+                        placeholder="Peça algo à DocsCode AI..."
+                        autocomplete="off"
+                    >
+
+                    <button type="submit" class="send-button"
+                            id="sendButton" title="Enviar mensagem">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+
+                </form>
+
+                <p class="prompt-hint">
+                    A inteligência artificial pode cometer erros.
+                </p>
+
+            </div>
+
+            <!-- Sugestões -->
+            <div class="suggestions">
+
+                <button class="suggestion" data-prompt="Me ajude a programar">
+                    <i class="bi bi-code-slash"></i>
+                    Programar
+                </button>
+
+                <button class="suggestion" data-prompt="Me ajude a estudar">
+                    <i class="bi bi-book"></i>
+                    Estudar
+                </button>
+
+                <button class="suggestion" data-prompt="Explique este código">
+                    <i class="bi bi-lightbulb"></i>
+                    Explicar código
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const menuToggle = document.getElementById('menuToggle');
+
+        const promptInput = document.getElementById('promptInput');
+        const chatForm = document.getElementById('chatForm');
+        const sendButton = document.getElementById('sendButton');
+
+        // Abrir e fechar menu em telas pequenas
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        // Mostrar botão de envio quando houver texto
+        promptInput.addEventListener('input', () => {
+            const hasText = promptInput.value.trim().length > 0;
+
+            sendButton.style.display = hasText ? 'flex' : 'none';
+        });
+
+        // Preencher o campo pelas sugestões
+        document.querySelectorAll('.suggestion').forEach(button => {
+            button.addEventListener('click', () => {
+                promptInput.value = button.dataset.prompt;
+                promptInput.dispatchEvent(new Event('input'));
+                promptInput.focus();
+            });
+        });
+
+        // Comportamento demonstrativo do formulário
+        chatForm.addEventListener('submit', event => {
+            event.preventDefault();
+
+            const mensagem = promptInput.value.trim();
+
+            if (!mensagem) {
+                return;
+            }
+
+            alert(
+                'Mensagem: ' + mensagem +
+                '\nModelo: ' + document.getElementById('modelSelect').value +
+                '\n\nConecte uma API de IA para receber respostas.'
+            );
+
+            // Limpar campo após envio
+            promptInput.value = '';
+            promptInput.dispatchEvent(new Event('input'));
+        });
+
+        // Fechar menu ao clicar fora dele em dispositivos móveis
+        document.addEventListener('click', event => {
+            if (
+                window.innerWidth <= 768 &&
+                !sidebar.contains(event.target) &&
+                !menuToggle.contains(event.target)
+            ) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
+
 </body>
 </html>
