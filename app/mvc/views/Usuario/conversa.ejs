@@ -55,17 +55,20 @@
             padding: 0 10px 22px;
         }
 
+        /* Logo */
+
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 17px;
+            gap: 12px;
+            font-size: 20px;
             font-weight: 500;
+            letter-spacing: -0.4px;
         }
 
         .imagem-container {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -76,80 +79,30 @@
             height: auto;
         }
 
-        .header-icons {
-            display: flex;
-            gap: 15px;
-            color: #bdbdbd;
-        }
-
-        .header-icons i {
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        /* Navegação */
-
-        .menu {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
+        /* Menu lateral */
         .menu-item {
             display: flex;
             align-items: center;
-            gap: 13px;
+            gap: 14px;
             width: 100%;
-            padding: 9px 12px;
+            padding: 12px 15px;
             border-radius: 25px;
             color: #dedede;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 400;
-            transition: 0.2s;
+            transition: background-color 0.2s, color 0.2s;
         }
 
         .menu-item i {
-            font-size: 16px;
+            font-size: 19px;
         }
 
-        .menu-item:hover,
-        .menu-item.active {
-            background-color: #151515;
-            color: white;
-        }
-
-        .menu-item.active {
-            font-weight: 500;
-        }
-
-        /* Notebooks */
-
+        /* Títulos das seções */
         .section-label {
-            color: #999;
-            font-size: 11px;
-            padding: 22px 7px 8px;
-        }
-
-        .notebook-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 10px;
-            color: #dedede;
-            font-size: 12px;
-            text-decoration: none;
-            border-radius: 20px;
-            transition: 0.2s;
-        }
-
-        .notebook-item:hover {
-            background-color: #303030;
-            color: white;
-        }
-
-        .notebook-item i {
-            font-size: 16px;
+            color: #aaa;
+            font-size: 13px;
+            padding: 24px 9px 10px;
         }
 
         .history-header {
@@ -163,13 +116,14 @@
             padding-top: 22px;
         }
 
+        /* Histórico */
         .history-item {
             display: block;
-            padding: 9px 7px;
+            padding: 11px 9px;
             color: #dedede;
             text-decoration: none;
-            font-size: 11px;
-            border-radius: 8px;
+            font-size: 13px;
+            border-radius: 10px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -189,25 +143,21 @@
             padding: 10px 7px 3px;
         }
 
+        /* Perfil */
         .avatar {
-            width: 29px;
-            height: 29px;
-            min-width: 29px;
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
             border-radius: 50%;
             background: linear-gradient(135deg, #51afe3, #7460dc);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 14px;
-        }
-
-        .profile-info {
-            flex: 1;
-            min-width: 0;
+            font-size: 17px;
         }
 
         .profile-name {
-            font-size: 10px;
+            font-size: 12px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -215,15 +165,17 @@
 
         .profile-plan {
             color: #aaa;
-            font-size: 10px;
+            font-size: 11px;
         }
 
         .settings-button {
             background: transparent;
             border: none;
             color: #ccc;
-            font-size: 16px;
+            font-size: 19px;
+            padding: 5px;
         }
+
 
         /* Área principal */
 
@@ -280,56 +232,65 @@
             padding-bottom: 100px;
         }
 
+        /* Título central */
         .titulo {
-            font-size: 30px;
+            font-size: 38px;
             font-weight: 400;
             color: #e5e2ec;
             text-align: center;
-            margin-bottom: 34px;
-            letter-spacing: -1px;
+            margin-bottom: 38px;
+            letter-spacing: -1.2px;
+            line-height: 1.3;
+        }
+
+        /* Área do formulário */
+        .prompt-container {
+            width: 100%;
+            max-width: 680px;
         }
 
         /* Caixa de mensagem */
-
-        .prompt-container {
-            width: 100%;
-            max-width: 570px;
-        }
-
         .prompt-box {
-            min-height: 56px;
+            min-height: 68px;
             width: 100%;
             background-color: #222124;
-            border: 1px solid transparent;
+            border: 1px solid #343139;
             border-radius: 35px;
-            padding: 10px 15px;
+            padding: 12px 17px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            transition: border-color 0.2s, background-color 0.2s;
+            gap: 13px;
+            transition: border-color 0.2s, background-color 0.2s,
+                        box-shadow 0.2s;
         }
 
         .prompt-box:focus-within {
-            border-color: #49465b;
+            border-color: #51afe3;
             background-color: #252329;
+            box-shadow: 0 0 0 3px rgba(81, 175, 227, 0.08);
         }
+        
+        /* Botão de adicionar */
 
         .prompt-icon {
             background: transparent;
             border: none;
             color: #e0e0e0;
-            font-size: 21px;
-            padding: 0 3px;
+            font-size: 25px;
+            padding: 5px;
+            min-width: 38px;
+            min-height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
+            transition: color 0.2s;
         }
 
         .prompt-icon:hover {
             color: #51afe3;
         }
 
+        /* Campo de texto */
         .prompt-input {
             flex: 1;
             min-width: 0;
@@ -338,17 +299,18 @@
             outline: none;
             color: white;
             font-family: 'Poppins', sans-serif;
-            font-size: 13px;
+            font-size: 16px;
         }
 
         .prompt-input::placeholder {
             color: #c4c2c8;
         }
 
+        /* Botão de envio */
         .send-button {
             display: none;
-            width: 33px;
-            height: 33px;
+            width: 42px;
+            height: 42px;
             flex-shrink: 0;
             align-items: center;
             justify-content: center;
@@ -356,19 +318,23 @@
             border-radius: 50%;
             background-color: #51afe3;
             color: #100e12;
-            transition: 0.2s;
+            font-size: 19px;
+            transition: background-color 0.2s, transform 0.2s;
         }
 
         .send-button:hover {
             background-color: #8acdf2;
+            transform: scale(1.04);
         }
 
+        /* Aviso abaixo da caixa */
         .prompt-hint {
-            color: #89868f;
-            font-size: 10px;
+            color: #99959f;
+            font-size: 12px;
             text-align: center;
-            margin-top: 14px;
+            margin-top: 16px;
         }
+
 
         /* Mensagens de exemplo */
 
@@ -376,35 +342,43 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 25px;
+            gap: 12px;
+            margin-top: 30px;
         }
 
         .suggestion {
-            padding: 9px 14px;
-            border: 1px solid #343139;
-            background-color: rgba(34, 33, 36, 0.7);
-            color: #c9c6d0;
-            border-radius: 20px;
+            padding: 12px 18px;
+            min-height: 46px;
+            border: 1px solid #393640;
+            background-color: rgba(34, 33, 36, 0.8);
+            color: #d4d1dc;
+            border-radius: 25px;
             font-family: 'Poppins', sans-serif;
-            font-size: 10px;
+            font-size: 13px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: border-color 0.2s, color 0.2s,
+                        background-color 0.2s, transform 0.2s;
+        }
+
+        .suggestion i {
+            font-size: 16px;
+            margin-right: 5px;
         }
 
         .suggestion:hover {
             border-color: #51afe3;
             color: white;
             background-color: #252329;
+            transform: translateY(-2px);
         }
+
 
         /* Responsividade */
 
         @media (max-width: 768px) {
-
             .sidebar {
                 transform: translateX(-100%);
-                width: 260px;
+                width: 270px;
                 box-shadow: 10px 0 30px rgba(0, 0, 0, 0.3);
             }
 
@@ -417,21 +391,21 @@
             }
 
             .topbar {
-                padding: 12px 16px;
+                padding: 12px 18px;
             }
 
             .chat-area {
-                padding: 20px;
+                padding: 25px 22px;
                 padding-bottom: 60px;
             }
 
             .titulo {
-                font-size: 27px;
-                margin-bottom: 28px;
+                font-size: 32px;
+                margin-bottom: 30px;
             }
 
             .prompt-container {
-                max-width: 570px;
+                max-width: 600px;
             }
 
             main::before {
@@ -441,33 +415,55 @@
         }
 
         @media (max-width: 480px) {
+            .chat-area {
+                padding: 20px 15px;
+                padding-bottom: 40px;
+            }
 
             .titulo {
-                font-size: 24px;
+                font-size: 27px;
+                margin-bottom: 25px;
+                letter-spacing: -0.7px;
             }
 
             .prompt-box {
+                min-height: 60px;
                 padding: 9px 11px;
                 gap: 7px;
             }
 
             .prompt-input {
-                font-size: 12px;
+                font-size: 14px;
             }
 
             .prompt-icon {
-                font-size: 18px;
+                font-size: 21px;
+                min-width: 32px;
+                min-height: 32px;
+            }
+
+            .send-button {
+                width: 38px;
+                height: 38px;
+            }
+
+            .prompt-hint {
+                font-size: 11px;
+                padding: 0 8px;
             }
 
             .suggestions {
-                gap: 7px;
+                gap: 9px;
+                margin-top: 24px;
             }
 
             .suggestion {
-                font-size: 10px;
-                padding: 8px 11px;
+                font-size: 12px;
+                padding: 10px 13px;
+                min-height: 42px;
             }
         }
+
     </style>
 </head>
 
@@ -575,7 +571,7 @@
                 </form>
 
                 <p class="prompt-hint">
-                    A inteligência artificial pode cometer erros.
+                    A IA pode falhar ou gerar informações incorretas.
                 </p>
 
             </div>
@@ -605,23 +601,16 @@
     </main>
 
     <script>
-        const sidebar = document.getElementById('sidebar');
-        const menuToggle = document.getElementById('menuToggle');
 
+        const sidebar = document.getElementById('sidebar');
         const promptInput = document.getElementById('promptInput');
         const chatForm = document.getElementById('chatForm');
         const sendButton = document.getElementById('sendButton');
 
-        // Abrir e fechar menu em telas pequenas
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-        });
-
-        // Mostrar botão de envio quando houver texto
+        // Mostrar o botão de envio quando houver texto
         promptInput.addEventListener('input', () => {
-            const hasText = promptInput.value.trim().length > 0;
-
-            sendButton.style.display = hasText ? 'flex' : 'none';
+            sendButton.style.display =
+                promptInput.value.trim() ? 'flex' : 'none';
         });
 
         // Preencher o campo pelas sugestões
@@ -633,37 +622,23 @@
             });
         });
 
-        // Comportamento demonstrativo do formulário
+        // Envio demonstrativo
         chatForm.addEventListener('submit', event => {
             event.preventDefault();
 
             const mensagem = promptInput.value.trim();
 
-            if (!mensagem) {
-                return;
-            }
+            if (!mensagem) return;
 
             alert(
                 'Mensagem: ' + mensagem +
-                '\nModelo: ' + document.getElementById('modelSelect').value +
                 '\n\nConecte uma API de IA para receber respostas.'
             );
 
-            // Limpar campo após envio
             promptInput.value = '';
             promptInput.dispatchEvent(new Event('input'));
         });
 
-        // Fechar menu ao clicar fora dele em dispositivos móveis
-        document.addEventListener('click', event => {
-            if (
-                window.innerWidth <= 768 &&
-                !sidebar.contains(event.target) &&
-                !menuToggle.contains(event.target)
-            ) {
-                sidebar.classList.remove('open');
-            }
-        });
     </script>
 
 </body>
