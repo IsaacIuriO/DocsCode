@@ -40,5 +40,5 @@ class Usuario
     
 }
 
-// Exporta para outros arquivos usarem a classe
+// Daqui vai para 'services'
 module.exports = Usuario

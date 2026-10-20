@@ -14,4 +14,5 @@ const sequelize = new Sequelize(
     }
 );
 
+// Daqui vai para 'schemas'
 module.exports = sequelize ;

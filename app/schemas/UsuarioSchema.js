@@ -40,5 +40,5 @@ Usuario.init(
     tableName: 'users'
 });
 
-// Coloca o model 'Usuario' para fora do arquivo, para que outros arquivos (SERVICE) possam usar
+// Daqui vai para 'services' 
 module.exports = Usuario;

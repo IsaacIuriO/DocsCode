@@ -33,4 +33,6 @@ router.get("/usuario/listar", (req, res) => UsuarioController.usuarioLista(req, 
 // Deleta usuário do banco de dados (função)
 router.delete("/usuario/deletar/:id", (req, res) => UsuarioController.usuarioDeletarAsync(req, res));
 
+
+// Daqui vai para 'server.js'
 module.exports = router;

@@ -88,6 +88,17 @@ class UsuarioService
         return usuarios
     }
 
+    async buscarUsuarioPorId(id)
+    {
+        const usuario = await this.#usuarioSchema.findOne({
+            where: { id: id }
+        });
+
+        if (!usuario) { return null; }
+
+        return usuario.username;
+    }
+
     async deletarUsuario(id)
     {
         const usuario = await this.#usuarioSchema.findOne
@@ -101,5 +112,5 @@ class UsuarioService
     }
 }
 
-// exporta para outros arquivos
+// Daqui vai para 'controllers'
 module.exports = UsuarioService;

@@ -40,7 +40,7 @@
             left: 0;
             width: 248px;
             height: 100vh;
-            background-color: #201f20;
+            background-color: #1c172c;
             display: flex;
             flex-direction: column;
             padding: 15px 8px 10px;
@@ -86,7 +86,7 @@
             gap: 14px;
             width: 100%;
             padding: 12px 15px;
-            border-radius: 25px;
+            border-radius: 7px;
             color: #dedede;
             text-decoration: none;
             font-size: 14px;
@@ -96,6 +96,10 @@
 
         .menu-item i {
             font-size: 19px;
+        }
+
+        .menu-item:hover {
+            background-color: #3f316e;
         }
 
         /* Títulos das seções */
@@ -123,14 +127,15 @@
             color: #dedede;
             text-decoration: none;
             font-size: 13px;
-            border-radius: 10px;
+            border-radius: 15px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            transition: background-color 0.2s, color 0.2s;
         }
 
         .history-item:hover {
-            background-color: #303030;
+            background-color: #3f316e;
         }
 
         /* Perfil inferior */
@@ -156,6 +161,13 @@
             font-size: 17px;
         }
 
+        .profile-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
         .profile-name {
             font-size: 12px;
             white-space: nowrap;
@@ -168,12 +180,17 @@
             font-size: 11px;
         }
 
-        .settings-button {
+        .icons-button {
             background: transparent;
             border: none;
             color: #ccc;
-            font-size: 19px;
+            font-size: 18px;
             padding: 5px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .icons-button:hover {
+            color: #51afe3;
         }
 
 
@@ -200,22 +217,11 @@
             transform: translate(-50%, -43%);
             background: radial-gradient(
                 ellipse,
-                rgba(48, 62, 190, 0.36) 0%,
+                rgba(59, 38, 150, 0.36) 0%,
                 rgba(26, 37, 115, 0.22) 40%,
                 rgba(16, 14, 18, 0) 72%
             );
             pointer-events: none;
-        }
-
-        /* Cabeçalho superior */
-
-        .topbar {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 14px 25px;
         }
 
         /* Conteúdo central */
@@ -300,6 +306,8 @@
             color: white;
             font-family: 'Poppins', sans-serif;
             font-size: 16px;
+
+            padding: 12px 12px 12px 2px;
         }
 
         .prompt-input::placeholder {
@@ -390,10 +398,6 @@
                 margin-left: 0;
             }
 
-            .topbar {
-                padding: 12px 18px;
-            }
-
             .chat-area {
                 padding: 25px 22px;
                 padding-bottom: 60px;
@@ -481,9 +485,9 @@
                 <span>DocsCode AI</span>
             </div>
 
-            <div class="header-icons">
-                <i class="bi bi-search" title="Pesquisar"></i>
-            </div>
+            <button class="icons-button" title="Configurações">
+                <i class="bi bi-search"></i>
+            </button>
 
         </div>
 
@@ -522,11 +526,11 @@
             </div>
 
             <div class="profile-info">
-                <div class="profile-name">Meu Perfil</div>
-                <div class="profile-plan">Plano gratuito</div>
+                <div class="profile-name"><%= username || 'Visitante' %></div>
+                <div class="profile-plan">Plano Gratuito</div>
             </div>
 
-            <button class="settings-button" title="Configurações">
+            <button class="icons-button" title="Configurações">
                 <i class="bi bi-gear"></i>
             </button>
 
@@ -536,10 +540,6 @@
 
     <!-- Área principal -->
     <main>
-
-        <header class="topbar">
-            <!-- Topbar -->
-        </header>
 
         <!-- Conteúdo central -->
         <section class="chat-area">
@@ -584,9 +584,9 @@
                     Programar
                 </button>
 
-                <button class="suggestion" data-prompt="Me ajude a estudar">
+                <button class="suggestion" data-prompt="Me ajude a produzir um documento">
                     <i class="bi bi-book"></i>
-                    Estudar
+                    Documentar
                 </button>
 
                 <button class="suggestion" data-prompt="Explique este código">

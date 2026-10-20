@@ -50,11 +50,20 @@ class UsuarioController
 
     usuarioConversa(req, res)
     {
-        if (!req.session.usuarioLogado) {
-            return res.redirect('/usuario/login');
-        }
+        try
+        {
+            const username = req.session.username || 'Visitante';
 
-        res.render('Usuario/conversa');
+            if (!req.session.usuarioLogado) {
+                return res.redirect('/usuario/login');
+            }
+
+            res.render('Usuario/conversa', { username: username });
+        }
+        catch (erro)
+        {
+            res.status(500).send('Erro ao acessar a tela de conversa.');
+        }
     }
 
     // Acessa a tela de listagem de usuários
@@ -150,6 +159,8 @@ class UsuarioController
 
         res.json({ affectedRows: affectedRows })
     }
+
 }
 
+// Daqui vai para 'routes'
 module.exports = new UsuarioController();
