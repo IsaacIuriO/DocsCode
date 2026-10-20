@@ -67,7 +67,6 @@ class UsuarioService
         };
     }
 
-
     async buscarTodosUsuarios()
     {
         const usuarios = []

@@ -17,7 +17,7 @@ class UsuarioController
             return res.redirect('/usuario/conversa');
         }
 
-        return res.render('Usuario/index');
+        res.render('Usuario/index');
     }
 
     // Acessa a tela de cadastro do usuário
@@ -34,18 +34,7 @@ class UsuarioController
 
     usuarioLogout(req, res)
     {
-        req.session.destroy((erro) =>
-        {
-            if (erro)
-            {
-                console.error(erro);
-                return res.status(500).send('Erro ao sair da conta.');
-            }
-
-            res.clearCookie('docscode.sid');
-
-            return res.redirect('/usuario/login');
-        });
+        res.render('Usuario/index');
     }
 
     usuarioConversa(req, res)
@@ -86,7 +75,6 @@ class UsuarioController
     }
 
     // Acessa a tela de login do usuário
-    
     async usuarioLogarAsync(req, res)
     {
         try
@@ -150,7 +138,6 @@ class UsuarioController
             });
         }
     }
-
 
     // Deleta usuário do banco de dados
     async usuarioDeletarAsync(req, res)
