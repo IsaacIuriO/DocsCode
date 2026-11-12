@@ -4,7 +4,7 @@ const { DataTypes, Model } = require('sequelize');
 // MODEL: permite criar uma classe que representa uma tabela no banco de dados
 
 // Importa a configuração do banco de dados que a gente está usando
-const sequelize = require('../database/dbconfig');
+const sequelize = require('../../database/dbconfig');
 
 // Cria classe 'Usuario' que herda propriedades e métodos da classe Model
 // Ele pode manipular a tabela 'users' no banco de dados

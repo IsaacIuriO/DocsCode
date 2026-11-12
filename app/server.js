@@ -36,11 +36,12 @@ class Server
 
         // Sessão antes das rotas
         this.app.use(session(sessionConfig));
+        
+        // Rotas
+        this.app.use(router);
 
         this.app.set('view engine', 'ejs');
         this.app.set('views', path.join(__dirname, 'mvc/views'));
-
-        this.app.use(router);
     }
 
     listen()

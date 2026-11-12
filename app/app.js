@@ -1,4 +1,5 @@
 // app.js
+require('dotenv').config(); //DEVE VIR PRIMEIRO
 
 const sequelize = require('./database/dbconfig');
 const server = require("./server");

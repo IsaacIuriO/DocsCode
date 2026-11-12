@@ -2,15 +2,17 @@
 
 // Importa função do express para criar rotas
 const { Router } = require("express");
-
-// Importa o controller do usuário para ter acesso às funções de cadastro, listagem e deleção de usuários
-const UsuarioController = require("../controllers/UsuarioController");
 const verificarLogin = require("../middlewares/AuthMiddleware");
 
 // Cria uma instância do roteador do express
 const router = Router();
 
+// -----------------------------------
 // USUARIO
+// -----------------------------------
+
+// Importa o controller do usuário para ter acesso às funções de cadastro, listagem e deleção de usuários
+const UsuarioController = require("../controllers/UsuarioController");
 
 // Página inicial
 router.get("/", (req, res) => UsuarioController.index(req, res));
@@ -33,6 +35,23 @@ router.get("/usuario/listar", (req, res) => UsuarioController.usuarioLista(req, 
 // Deleta usuário do banco de dados (função)
 router.delete("/usuario/deletar/:id", (req, res) => UsuarioController.usuarioDeletarAsync(req, res));
 
+// -----------------------------------
+// DOCSCODE AI
+// -----------------------------------
+
+const IAController = require('../controllers/IAController');
+
+// Gera documentação técnica
+router.post("/usuario/conversa/gerar", verificarLogin, (req, res) => IAController.iaGerarDocumentacaoAsync(req, res));
+
+// Lista documentos gerados
+router.get("/usuario/documentos", verificarLogin, (req, res) => IAController.iaListarDocumentosAsync(req, res));
+
+// Busca documento por ID
+router.get("/usuario/documentos/:id", verificarLogin, (req, res) => IAController.iaBuscarDocumentoAsync(req, res));
+
+// Deleta documento
+router.delete("/usuario/documentos/:id", verificarLogin, (req, res) => IAController.iaDeletarDocumentoAsync(req, res));
 
 // Daqui vai para 'server.js'
 module.exports = router;

@@ -2,7 +2,7 @@
 
 // usa as importações do model e do schema para manipular os dados do usuário
 const Usuario = require('../mvc/models/UsuarioModel');
-const UsuarioSchema = require('../schemas/UsuarioSchema');
+const UsuarioSchema = require('../mvc/schemas/UsuarioSchema');
 
 // conexão com o banco de dados
 const sequelize = require('../database/dbconfig');

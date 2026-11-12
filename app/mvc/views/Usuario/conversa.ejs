@@ -777,6 +777,8 @@
 
             <h1 class="titulo">Compartilhe Tuas Ideias Comigo.</h1>
 
+            <div id="resposta"></div>
+
             <div class="prompt-container">
 
                 <form class="prompt-box" id="chatForm">
@@ -789,7 +791,7 @@
                     <input
                         type="text"
                         class="prompt-input"
-                        id="promptInput"
+                        id="pergunta"
                         placeholder="Peça algo à DocsCode AI..."
                         autocomplete="off"
                     >
@@ -832,6 +834,9 @@
     </main>
 
     <script>
+        // -----------------------------------
+        // VISUAL
+        // -----------------------------------
 
         const sidebar = document.getElementById('sidebar');
         const configbar = document.getElementById('configbar');
@@ -895,6 +900,60 @@
             promptInput.value = '';
             promptInput.dispatchEvent(new Event('input'));
         });
+
+        // -----------------------------------
+        // LÓGICA IA
+        // -----------------------------------
+
+        async function enviarPergunta()
+        {
+            const pergunta = document.getElementById('pergunta').value;
+            const resposta = document.getElementById('resposta');
+
+            if (!pergunta.trim())
+            {
+                alert('Digite uma solicitação.');
+                return;
+            }
+
+            resposta.textContent = 'Gerando documentação...';
+
+            try
+            {
+                const requisicao = await fetch(
+                    '/usuario/conversa/gerar',
+                    {
+                        method: 'POST',
+
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+
+                        body: JSON.stringify({
+                            pergunta: pergunta,
+                            tipo: 'geral'
+                        })
+                    }
+                );
+
+                const dados = await requisicao.json();
+
+                if (!requisicao.ok)
+                {
+                    throw new Error(dados.mensagem);
+                }
+
+                resposta.textContent = dados.documento.resposta;
+
+                console.log('Documento:', dados.documento);
+            }
+            catch (erro)
+            {
+                console.error('Erro:', erro);
+                resposta.textContent = erro.message || 'Erro ao comunicar com a IA.';
+            }
+        }
+
 
     </script>
 
