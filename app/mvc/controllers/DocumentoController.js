@@ -1,6 +1,6 @@
 //IAController.js
 
-const IAService = require('../../services/DocumentoService');
+const IAService = require("../../services/DocumentoService");
 
 class IAController
 {
@@ -19,17 +19,17 @@ class IAController
             if (!pergunta || !pergunta.trim())
             {
                 return res.status(400).json({
-                    mensagem: 'Informe uma solicitação.'
+                    mensagem: "Informe uma solicitação."
                 });
             }
 
             const documento = await this.iaService.gerarDocumentacao(
                 pergunta,
-                tipo || 'geral'
+                tipo || "geral"
             );
 
             return res.status(201).json({
-                mensagem: 'Documentação gerada com sucesso!',
+                mensagem: "Documentação gerada com sucesso!",
 
                 documento: {
                     id: documento.id,
@@ -42,10 +42,10 @@ class IAController
         }
         catch (erro)
         {
-            console.error('Erro ao gerar documentação:', erro);
+            console.error("Erro ao gerar documentação:", erro);
 
             return res.status(500).json({
-                mensagem: 'Não foi possível gerar a documentação.'
+                mensagem: "Não foi possível gerar a documentação."
             });
         }
     }
@@ -64,10 +64,10 @@ class IAController
         }
         catch (erro)
         {
-            console.error('Erro ao listar documentos:', erro);
+            console.error("Erro ao listar documentos:", erro);
 
             return res.status(500).json({
-                mensagem: 'Erro ao listar documentos.'
+                mensagem: "Erro ao listar documentos."
             });
         }
     }
@@ -83,7 +83,7 @@ class IAController
             if (!documento)
             {
                 return res.status(404).json({
-                    mensagem: 'Documento não encontrado.'
+                    mensagem: "Documento não encontrado."
                 });
             }
 
@@ -93,10 +93,10 @@ class IAController
         }
         catch (erro)
         {
-            console.error('Erro ao buscar documento:', erro);
+            console.error("Erro ao buscar documento:", erro);
 
             return res.status(500).json({
-                mensagem: 'Erro ao buscar documento.'
+                mensagem: "Erro ao buscar documento."
             });
         }
     }
@@ -115,10 +115,10 @@ class IAController
         }
         catch (erro)
         {
-            console.error('Erro ao deletar documento:', erro);
+            console.error("Erro ao deletar documento:", erro);
 
             return res.status(500).json({
-                mensagem: 'Erro ao deletar documento.'
+                mensagem: "Erro ao deletar documento."
             });
         }
     }

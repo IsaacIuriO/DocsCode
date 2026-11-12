@@ -838,15 +838,15 @@
         // VISUAL
         // -----------------------------------
 
-        const sidebar = document.getElementById('sidebar');
-        const configbar = document.getElementById('configbar');
-        const configButton = document.getElementById('configButton');
-        configButton.addEventListener('click', () => {
+        const sidebar = document.getElementById("sidebar");
+        const configbar = document.getElementById("configbar");
+        const configButton = document.getElementById("configButton");
+        configButton.addEventListener("click", () => {
             configbar.hidden = !configbar.hidden;
         });
 
-        const logoutButton = document.getElementById('logoutButton');
-        logoutButton.addEventListener('click', deslogarUsuario);
+        const logoutButton = document.getElementById("logoutButton");
+        logoutButton.addEventListener("click", deslogarUsuario);
 
         async function deslogarUsuario(e)
         {
@@ -860,32 +860,32 @@
                     });
                 }
                 req.session.usuarioLogado = false;
-                return res.render('/', { mensagem: "Logout realizado com sucesso!" });
+                return res.render("/", { mensagem: "Logout realizado com sucesso!" });
             });
 
         }
 
-        const promptInput = document.getElementById('promptInput');
-        const sendButton = document.getElementById('sendButton');
-        const chatForm = document.getElementById('chatForm');
+        const promptInput = document.getElementById("promptInput");
+        const sendButton = document.getElementById("sendButton");
+        const chatForm = document.getElementById("chatForm");
         
         // Mostrar o botão de envio quando houver texto
-        promptInput.addEventListener('input', () => {
+        promptInput.addEventListener("input", () => {
             sendButton.style.display =
-            promptInput.value.trim() ? 'flex' : 'none';
+            promptInput.value.trim() ? "flex" : "none";
         });
 
         // Preencher o campo pelas sugestões
-        document.querySelectorAll('.suggestion').forEach(button => {
-            button.addEventListener('click', () => {
+        document.querySelectorAll(".suggestion").forEach(button => {
+            button.addEventListener("click", () => {
                 promptInput.value = button.dataset.prompt;
-                promptInput.dispatchEvent(new Event('input'));
+                promptInput.dispatchEvent(new Event("input"));
                 promptInput.focus();
             });
         });
 
         // Envio demonstrativo
-        chatForm.addEventListener('submit', event => {
+        chatForm.addEventListener("submit", event => {
             event.preventDefault();
 
             const mensagem = promptInput.value.trim();
@@ -893,12 +893,12 @@
             if (!mensagem) return;
 
             alert(
-                'Mensagem: ' + mensagem +
-                '\n\nConecte uma API de IA para receber respostas.'
+                "Mensagem: " + mensagem +
+                "\n\nConecte uma API de IA para receber respostas."
             );
 
-            promptInput.value = '';
-            promptInput.dispatchEvent(new Event('input'));
+            promptInput.value = "";
+            promptInput.dispatchEvent(new Event("input"));
         });
 
         // -----------------------------------
@@ -907,31 +907,31 @@
 
         async function enviarPergunta()
         {
-            const pergunta = document.getElementById('pergunta').value;
-            const resposta = document.getElementById('resposta');
+            const pergunta = document.getElementById("pergunta").value;
+            const resposta = document.getElementById("resposta");
 
             if (!pergunta.trim())
             {
-                alert('Digite uma solicitação.');
+                alert("Digite uma solicitação.");
                 return;
             }
 
-            resposta.textContent = 'Gerando documentação...';
+            resposta.textContent = "Gerando documentação...";
 
             try
             {
                 const requisicao = await fetch(
-                    '/usuario/conversa/gerar',
+                    "/usuario/conversa/gerar",
                     {
-                        method: 'POST',
+                        method: "POST",
 
                         headers: {
-                            'Content-Type': 'application/json'
+                            "Content-Type": "application/json"
                         },
 
                         body: JSON.stringify({
                             pergunta: pergunta,
-                            tipo: 'geral'
+                            tipo: "geral"
                         })
                     }
                 );
@@ -945,12 +945,12 @@
 
                 resposta.textContent = dados.documento.resposta;
 
-                console.log('Documento:', dados.documento);
+                console.log("Documento:", dados.documento);
             }
             catch (erro)
             {
-                console.error('Erro:', erro);
-                resposta.textContent = erro.message || 'Erro ao comunicar com a IA.';
+                console.error("Erro:", erro);
+                resposta.textContent = erro.message || "Erro ao comunicar com a IA.";
             }
         }
 

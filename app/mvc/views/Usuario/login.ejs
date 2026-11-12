@@ -32,7 +32,7 @@
 
                 background-color: #120a2b;
 
-                font-family: 'Poppins', sans-serif;
+                font-family: "Poppins", sans-serif;
 
                 color: white;
             }
@@ -115,7 +115,7 @@
 
                 padding: 8px 18px;
 
-                font-family: 'Poppins', sans-serif;
+                font-family: "Poppins", sans-serif;
                 font-size: 16px;
 
                 box-shadow: none;
@@ -141,7 +141,7 @@
 
                 padding: 15px 58px;
 
-                font-family: 'Poppins', sans-serif;
+                font-family: "Poppins", sans-serif;
                 font-size: 20px;
 
                 transition: 0.2s;
@@ -313,14 +313,14 @@
             {
                 e.preventDefault();
 
-                const email = document.getElementById('email');
-                const senha = document.getElementById('senha');
+                const email = document.getElementById("email");
+                const senha = document.getElementById("senha");
 
                 const url = "/usuario/login";
                 
                 const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         email: email.value,
                         senha: senha.value

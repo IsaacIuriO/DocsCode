@@ -1,6 +1,6 @@
 // UsuarioController.js
 
-const UsuarioService = require('../../services/UsuarioService');
+const UsuarioService = require("../../services/UsuarioService");
 
 class UsuarioController
 {
@@ -14,44 +14,44 @@ class UsuarioController
     {
         if (req.session.usuarioLogado)
         {
-            return res.redirect('/usuario/conversa');
+            return res.redirect("/usuario/conversa");
         }
 
-        res.render('Usuario/index');
+        res.render("Usuario/index");
     }
 
     // Acessa a tela de cadastro do usuário
     usuarioCadastrar(req, res)
     {
-        res.render('Usuario/cadastro');
+        res.render("Usuario/cadastro");
     }
 
     // Acessa a tela de login do usuário
     usuarioLogin(req, res)
     {
-        res.render('Usuario/login');
+        res.render("Usuario/login");
     }
 
     usuarioLogout(req, res)
     {
-        res.render('Usuario/index');
+        res.render("Usuario/index");
     }
 
     usuarioConversa(req, res)
     {
         try
         {
-            const username = req.session.username || 'Visitante';
+            const username = req.session.username || "Visitante";
 
             if (!req.session.usuarioLogado) {
-                return res.redirect('/usuario/login');
+                return res.redirect("/usuario/login");
             }
 
-            res.render('Usuario/conversa', { username: username });
+            res.render("Usuario/conversa", { username: username });
         }
         catch (erro)
         {
-            res.status(500).send('Erro ao acessar a tela de conversa.');
+            res.status(500).send("Erro ao acessar a tela de conversa.");
         }
     }
 
@@ -149,5 +149,5 @@ class UsuarioController
 
 }
 
-// Daqui vai para 'routes'
+// Daqui vai para "routes"
 module.exports = new UsuarioController();

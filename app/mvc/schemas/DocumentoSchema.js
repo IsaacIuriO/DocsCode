@@ -1,8 +1,8 @@
 // DocumentoSchema.js
 
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes, Model } = require("sequelize");
 
-const sequelize = require('../../database/dbconfig');
+const sequelize = require("../../database/dbconfig");
 
 class Documento extends Model {}
 
@@ -16,7 +16,7 @@ Documento.init(
 
     resposta:
     {
-        type: DataTypes.TEXT('long'),
+        type: DataTypes.TEXT("long"),
         allowNull: false
     },
 
@@ -28,14 +28,14 @@ Documento.init(
 
     codigoUML:
     {
-        type: DataTypes.TEXT('long'),
+        type: DataTypes.TEXT("long"),
         allowNull: true
     }
 },
 {
     sequelize,
-    modelName: 'Documento',
-    tableName: 'documentos'
+    modelName: "Documento",
+    tableName: "documentos"
 });
 
 module.exports = Documento;

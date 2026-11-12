@@ -1,10 +1,10 @@
 // IAService.js
 
-const OpenAI = require('openai');
+const OpenAI = require("openai");
 
 // Importa a entidade e o schema
-const Documento = require('../mvc/models/DocumentoModel');
-const DocumentoSchema = require('../mvc/schemas/DocumentoSchema');
+const Documento = require("../mvc/models/DocumentoModel");
+const DocumentoSchema = require("../mvc/schemas/DocumentoSchema");
 
 // Instancia a API da OpenAI
 const openai = new OpenAI({
@@ -21,11 +21,11 @@ class IAService
     }
 
     // Gera documentação técnica utilizando IA
-    async gerarDocumentacao(pergunta, tipo = 'geral')
+    async gerarDocumentacao(pergunta, tipo = "geral")
     {
         if (!pergunta || !pergunta.trim())
         {
-            throw new Error('A pergunta não pode estar vazia.');
+            throw new Error("A pergunta não pode estar vazia.");
         }
 
         const instrucoes = `
@@ -76,7 +76,7 @@ class IAService
 
         if (!textoResposta)
         {
-            throw new Error('A IA não retornou uma resposta.');
+            throw new Error("A IA não retornou uma resposta.");
         }
 
         // Identifica um possível diagrama Mermaid
@@ -113,7 +113,7 @@ class IAService
     async buscarTodosDocumentos()
     {
         const dados = await this.#documentoSchema.findAll({
-            order: [['createdAt', 'DESC']]
+            order: [["createdAt", "DESC"]]
         });
 
         const documentos = [];
