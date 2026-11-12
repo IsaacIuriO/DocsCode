@@ -1,6 +1,6 @@
 //IAController.js
 
-const IAService = require('../../services/IAService');
+const IAService = require('../../services/DocumentoService');
 
 class IAController
 {

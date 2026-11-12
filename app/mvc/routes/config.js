@@ -39,7 +39,7 @@ router.delete("/usuario/deletar/:id", (req, res) => UsuarioController.usuarioDel
 // DOCSCODE AI
 // -----------------------------------
 
-const IAController = require('../controllers/IAController');
+const IAController = require('../controllers/DocumentoController');
 
 // Gera documentação técnica
 router.post("/usuario/conversa/gerar", verificarLogin, (req, res) => IAController.iaGerarDocumentacaoAsync(req, res));
