@@ -3,8 +3,8 @@
 const OpenAI = require("openai");
 
 // Importa a entidade e o schema
-const Documento = require("../mvc/models/DocumentoModel");
-const DocumentoSchema = require("../mvc/schemas/DocumentoSchema");
+const Documento = require("../models/DocumentoModel");
+const DocumentoSchema = require("../schemas/DocumentoSchema");
 
 // Instancia a API da OpenAI
 const openai = new OpenAI({

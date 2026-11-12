@@ -1,11 +1,11 @@
 // UsuarioService.js
 
 // usa as importações do model e do schema para manipular os dados do usuário
-const Usuario = require("../mvc/models/UsuarioModel");
-const UsuarioSchema = require("../mvc/schemas/UsuarioSchema");
+const Usuario = require("../models/UsuarioModel");
+const UsuarioSchema = require("../schemas/UsuarioSchema");
 
 // conexão com o banco de dados
-const sequelize = require("../database/dbconfig");
+const sequelize = require("../../database/dbconfig");
 
 // instala biblioteca de criptografia
 const bcrypt = require("bcrypt");
