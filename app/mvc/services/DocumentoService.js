@@ -106,6 +106,8 @@ class IAService
 
         documento.id = registro.id;
 
+        console.log('Modelo configurado:', process.env.OPENAI_MODEL);
+
         return documento;
     }
 
