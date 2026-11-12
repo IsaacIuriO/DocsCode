@@ -1,7 +1,7 @@
 // app.js
-require('dotenv').config(); //DEVE VIR PRIMEIRO
+require("dotenv").config(); //DEVE VIR PRIMEIRO
 
-const sequelize = require('./database/dbconfig');
+const sequelize = require("./database/dbconfig");
 const server = require("./server");
 
 async function run()
@@ -11,10 +11,10 @@ async function run()
     try
     {
         await sequelize.authenticate();
-        console.log('Conexão com o banco realizada com sucesso!');
+        console.log("Conexão com o banco realizada com sucesso!");
 
         await sequelize.sync();
-        console.log('Modelos Sincronizados!');
+        console.log("Modelos Sincronizados!");
 
         server.port = port;
         server.listen();
@@ -22,7 +22,7 @@ async function run()
     
     catch (error)
     {
-        console.error('Erro ao iniciar a aplicação...', error);
+        console.error("Erro ao iniciar a aplicação...", error);
     }
 }
 
