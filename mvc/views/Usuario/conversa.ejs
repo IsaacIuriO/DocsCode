@@ -16,6 +16,13 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+
+    <!-- Segurança HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -557,31 +564,323 @@
         }
 
         /* Caixa geral da resposta */
+        
+        /* ===================================
+            RENDERIZAÇÃO MARKDOWN
+        =================================== */
+
         #resposta {
             display: none;
             width: 100%;
-            padding: 22px 25px;
+            padding: 25px;
 
             color: #e8e3f2;
             font-size: 14px;
             font-weight: 300;
-            line-height: 1.9;
+            line-height: 1.85;
 
             background: rgba(32, 29, 41, 0.85);
             border: 1px solid #393344;
             border-radius: 18px;
 
-            white-space: pre-wrap;
             overflow-wrap: anywhere;
-
             box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
 
             animation: aparecerResposta 0.3s ease;
         }
 
-        /* Resposta visível */
         #resposta:not(:empty) {
             display: block;
+        }
+
+        /* Títulos */
+
+        #resposta h1,
+        #resposta h2,
+        #resposta h3,
+        #resposta h4 {
+            color: #ffffff;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            line-height: 1.4;
+            margin: 25px 0 14px;
+        }
+
+        #resposta h1 {
+            font-size: 25px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        #resposta h2 {
+            font-size: 21px;
+        }
+
+        #resposta h3 {
+            font-size: 17px;
+        }
+
+        #resposta h4 {
+            font-size: 15px;
+        }
+
+        /* Primeiro título sem margem excessiva */
+
+        #resposta > h1:first-child,
+        #resposta > h2:first-child,
+        #resposta > h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Parágrafos */
+
+        #resposta p {
+            margin: 12px 0;
+            color: #d8d2e4;
+        }
+
+        /* Negrito e itálico */
+
+        #resposta strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        #resposta em {
+            color: #c4b5fd;
+        }
+
+        /* Listas */
+
+        #resposta ul,
+        #resposta ol {
+            padding-left: 26px;
+            margin: 14px 0;
+        }
+
+        #resposta li {
+            padding-left: 5px;
+            margin: 7px 0;
+            color: #ddd7e9;
+        }
+
+        #resposta li::marker {
+            color: var(--accent-light);
+        }
+
+        /* Links */
+
+        #resposta a {
+            color: #b5a2ff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(181, 162, 255, 0.35);
+            overflow-wrap: anywhere;
+        }
+
+        #resposta a:hover {
+            color: #d2c5ff;
+        }
+
+        /* Código em linha */
+
+        #resposta :not(pre) > code {
+            padding: 3px 7px;
+            color: #d5c5ff;
+            font-family: Consolas, monospace;
+            font-size: 0.9em;
+            background: #30283f;
+            border: 1px solid #443858;
+            border-radius: 6px;
+        }
+
+        /* Blocos de código */
+
+        #resposta pre {
+            margin: 18px 0;
+            padding: 18px;
+
+            overflow-x: auto;
+
+            color: #e5ddf5;
+            background: #15121d;
+
+            border: 1px solid #403650;
+            border-radius: 12px;
+
+            font-size: 13px;
+            line-height: 1.7;
+
+            scrollbar-width: thin;
+            scrollbar-color: #51446e transparent;
+        }
+
+        #resposta pre code {
+            padding: 0;
+            color: inherit;
+            background: transparent;
+            border: none;
+            font-family: Consolas, monospace;
+        }
+
+        /* Citações */
+
+        #resposta blockquote {
+            margin: 18px 0;
+            padding: 12px 18px;
+
+            color: #c9c0d9;
+            background: rgba(139, 108, 255, 0.08);
+
+            border-left: 3px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+        }
+
+        #resposta blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Tabelas */
+
+        #resposta table {
+            width: 100%;
+            margin: 20px 0;
+
+            border-collapse: collapse;
+            overflow: hidden;
+
+            font-size: 13px;
+            background: #1a1723;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        #resposta th,
+        #resposta td {
+            padding: 12px 14px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        #resposta th {
+            color: #ffffff;
+            font-weight: 600;
+            background: #302640;
+        }
+
+        #resposta td {
+            color: #d8d2e4;
+        }
+
+        #resposta tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        /* Separadores */
+
+        #resposta hr {
+            margin: 24px 0;
+            border: 0;
+            border-top: 1px solid #443b52;
+        }
+
+        /* Imagens */
+
+        #resposta img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 18px auto;
+            border-radius: 12px;
+        }
+
+        /* Mensagens da conversa */
+
+        .chat-messages {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 20px;
+        }
+
+        /* Mensagem do usuário */
+
+        .mensagem-usuario {
+            align-self: flex-end;
+            max-width: 80%;
+            padding: 13px 18px;
+
+            color: #fff;
+            background: #493779;
+            border: 1px solid #67509e;
+            border-radius: 17px 17px 4px 17px;
+
+            font-size: 14px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        /* Resposta da IA */
+
+        .mensagem-ia {
+            align-self: stretch;
+            width: 100%;
+            padding: 22px 25px;
+
+            color: #e8e3f2;
+            background: rgba(32, 29, 41, 0.85);
+            border: 1px solid #393344;
+            border-radius: 18px;
+
+            font-size: 14px;
+            line-height: 1.85;
+            overflow-wrap: anywhere;
+        }
+
+        /* Celulares */
+
+        @media (max-width: 600px) {
+            .mensagem-usuario {
+                max-width: 90%;
+            }
+
+            .mensagem-ia {
+                padding: 17px;
+                font-size: 13px;
+            }
+        }
+
+        /* Tabelas em telas pequenas */
+
+        @media (max-width: 600px) {
+            #resposta {
+                padding: 17px;
+                font-size: 13px;
+            }
+
+            #resposta h1 {
+                font-size: 21px;
+            }
+
+            #resposta h2 {
+                font-size: 18px;
+            }
+
+            #resposta pre {
+                padding: 13px;
+                font-size: 12px;
+            }
+
+            #resposta table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            #resposta th,
+            #resposta td {
+                padding: 9px 11px;
+            }
         }
 
         /* Animação */
@@ -848,9 +1147,6 @@
             <h1 class="titulo">Compartilhe Tuas Ideias Comigo.</h1>
 
             <div class="chat-messages" id="chatMessages">
-
-                <div id="resposta"></div>
-
             </div>
 
             <div class="prompt-container">
@@ -886,17 +1182,17 @@
             <!-- Sugestões -->
             <div class="suggestions">
 
-                <button class="suggestion" data-prompt="Me ajude a programar">
+                <button class="suggestion" data-prompt="Gere um documento UML sobre">
                     <i class="bi bi-code-slash"></i>
-                    Programar
+                    UML
                 </button>
 
-                <button class="suggestion" data-prompt="Me ajude a produzir um documento">
+                <button class="suggestion" data-prompt="Com base nesta conversa, gere um prompt visual detalhado.">
                     <i class="bi bi-book"></i>
-                    Documentar
+                    Prompt Visual
                 </button>
 
-                <button class="suggestion" data-prompt="Me explique este">
+                <button class="suggestion" data-prompt="Me explique sobre">
                     <i class="bi bi-lightbulb"></i>
                     Explicar
                 </button>
@@ -972,21 +1268,66 @@
         // LÓGICA IA
         // -----------------------------------
 
-        async function enviarPergunta()
-        {
+        // Histórico da conversa
+        let historicoConversa = [];
+
+        function adicionarMensagem(tipo, conteudo) {
+
+            const chatMessages = document.getElementById("chatMessages");
+
+            const mensagem = document.createElement("div");
+
+            mensagem.classList.add(
+                tipo === "user" ? "mensagem-usuario" : "mensagem-ia"
+            );
+
+            if (tipo === "user") {
+
+                mensagem.textContent = conteudo;
+
+            } else {
+
+                mensagem.innerHTML = renderizarMarkdown(conteudo);
+
+            }
+
+            chatMessages.appendChild(mensagem);
+
+            return mensagem;
+        }
+
+        function renderizarMarkdown(conteudo) {
+
+            // Configuração do Markdown
+            marked.setOptions({
+                gfm: true,
+                breaks: false
+            });
+
+            // Converte Markdown em HTML
+            const html = marked.parse(conteudo);
+
+            // Sanitiza o HTML antes de inseri-lo na página
+            const htmlSeguro = DOMPurify.sanitize(html);
+
+            return htmlSeguro;
+        }
+
+        async function enviarPergunta() {
+
             const pergunta = document.getElementById("pergunta").value;
             const resposta = document.getElementById("resposta");
 
-            if (!pergunta.trim())
-            {
+            if (!pergunta.trim()) {
                 alert("Digite uma solicitação.");
                 return;
             }
 
+            // Mensagem inicial
             resposta.textContent = "Gerando documentação...";
 
-            try
-            {
+            try {
+
                 const requisicao = await fetch(
                     "/usuario/conversa/gerar",
                     {
@@ -1005,31 +1346,37 @@
 
                 const dados = await requisicao.json();
 
-                if (!requisicao.ok)
-                {
-                    throw new Error(dados.mensagem);
+                if (!requisicao.ok) {
+                    throw new Error(
+                        dados.mensagem || "Erro ao gerar documentação."
+                    );
                 }
 
-                resposta.textContent = dados.documento.resposta;
+                // Obtém a resposta da OpenAI
+                const conteudo = dados.documento.resposta;
+
+                // Converte Markdown em HTML seguro
+                resposta.innerHTML = renderizarMarkdown(conteudo);
 
                 console.log("Documento:", dados.documento);
-            }
-            catch (erro)
-            {
+
+            } catch (erro) {
+
                 console.error("Erro:", erro);
-                resposta.textContent = erro.message || "Erro ao comunicar com a IA.";
+
+                // Mensagens de erro continuam como texto puro
+                resposta.textContent =
+                    erro.message || "Erro ao comunicar com a IA.";
+
             }
 
-            resposta.textContent = dados.documento.resposta;
-
+            // Rola até a resposta
             document.getElementById("chatMessages").scrollTo({
-                top: document.getElementById("chatMessages").scrollHeight,
+                top: 0,
                 behavior: "smooth"
             });
 
-            console.log("Documento:", dados.documento);
         }
-
 
     </script>
 
