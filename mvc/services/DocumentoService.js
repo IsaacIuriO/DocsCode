@@ -59,6 +59,14 @@ class IAService
             - Quando gerar diagramas compatíveis com Mermaid,
               utilize blocos de código Mermaid.
             - Separe explicações dos códigos dos diagramas.
+
+            FUNÇÃO EXTRA:
+
+            - Pergunte ao usuário se o código gerado atende às necessidades do projeto.
+            - Se a resposta for negativa, pergunte quais ajustes são necessários.
+            - Se a resposta for positiva, pergunte se deseja que você gere um prompt para a criação visual deste UML ou encerrar a sessão.
+            - Se a reposta for 'gerar o prompt', você deve gerar um prompt detalhado para a criação visual do diagrama UML, incluindo instruções sobre cores, estilos e elementos visuais.
+            - Se a resposta for 'encerrar a sessão', você deve encerrar a sessão de forma educada, agradecendo pela oportunidade de ajudar no projeto.
         `;
 
         const resposta = await openai.responses.create({
@@ -105,8 +113,6 @@ class IAService
         });
 
         documento.id = registro.id;
-
-        console.log('Modelo configurado:', process.env.OPENAI_MODEL);
 
         return documento;
     }
